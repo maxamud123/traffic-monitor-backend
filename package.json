@@ -1,0 +1,26 @@
+{
+  "name": "traffic-monitor-backend",
+  "version": "1.0.0",
+  "main": "app.ts",
+  "scripts": {
+    "dev": "nodemon app.ts",
+    "start": "node app.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "mongoose": "^8.15.2",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
+    "typescript": "^5.8.3"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.1"
+  }
+}
