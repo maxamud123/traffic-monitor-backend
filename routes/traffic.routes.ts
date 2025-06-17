@@ -36,6 +36,11 @@ router.get('/', async (_req: Request, res: Response) => {
 router.post('/', async (req: Request, res: Response) => {
   const traffic = new Traffic(req.body);
   await traffic.save();
+  
+  // Emit the new traffic data to all connected clients
+  const io = req.app.get('io');
+  io.emit('traffic_update', traffic);
+  
   res.status(201).json(traffic);
 });
 
