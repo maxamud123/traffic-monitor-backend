@@ -1,4 +1,3 @@
-// backend/models/Traffic.ts
 import mongoose, { Document, Schema } from 'mongoose';
 
 export interface ITraffic extends Document {
@@ -9,21 +8,6 @@ export interface ITraffic extends Document {
   congestionLevel: 'low' | 'medium' | 'high';
 }
 
-export interface TrafficData {
-  currentSpeed: number;
-  averageSpeed: number;
-  congestionLevel: 'low' | 'moderate' | 'high';
-  estimatedDelay: number;
-  activeAlerts: number;
-}
-
-export interface SensorReading {
-  timestamp: Date;
-  vehicleCount: number;
-  averageSpeed: number;
-  densityLevel: number;
-}
-
 const TrafficSchema: Schema = new Schema({
   roadSegmentId: { type: String, required: true },
   timestamp: { type: Date, default: Date.now },
@@ -31,5 +15,9 @@ const TrafficSchema: Schema = new Schema({
   averageSpeedKph: { type: Number, required: true },
   congestionLevel: { type: String, enum: ['low', 'medium', 'high'], required: true },
 });
+
+// Indexes for fast queries
+TrafficSchema.index({ timestamp: -1 });
+TrafficSchema.index({ roadSegmentId: 1, timestamp: -1 });
 
 export default mongoose.model<ITraffic>('Traffic', TrafficSchema);

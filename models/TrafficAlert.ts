@@ -1,4 +1,3 @@
-// backend/models/TrafficAlert.ts
 import mongoose, { Document, Schema } from 'mongoose';
 
 export interface ITrafficAlert extends Document {
@@ -24,6 +23,10 @@ const TrafficAlertSchema: Schema = new Schema({
   isRead: { type: Boolean, default: false },
   status: { type: String, enum: ['active', 'resolved'], default: 'active' },
 });
+
+// Indexes for fast queries
+TrafficAlertSchema.index({ timestamp: -1 });
+TrafficAlertSchema.index({ status: 1, timestamp: -1 });
 
 const TrafficAlert = mongoose.model<ITrafficAlert>('TrafficAlert', TrafficAlertSchema);
 export default TrafficAlert;
